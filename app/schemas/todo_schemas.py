@@ -4,4 +4,4 @@ class TaskSchema(BaseModel):
     id: int
     name: str
     desc: str
-    compl = bool
+    compl: bool
