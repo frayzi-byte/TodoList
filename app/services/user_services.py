@@ -13,7 +13,7 @@ async def create_user(user : NewUser):
         session.add(db_user)
         await session.commit()
         await session.refresh(db_user)
-        return db_user.id
+        return db_user.user_id
     users = result.scalars().all()
     if users(len) == 3:
         raise HTTPException(status_code=401, detail="Fatal error\nUser cannot be created")
