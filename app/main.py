@@ -1,7 +1,6 @@
 from fastapi import FastAPI, Depends
 from app.routes import todo_routes, user_routes
 from app.db import ping_db, init_db
-from auth import authenticate_user
 
 
 app = FastAPI(
@@ -23,9 +22,6 @@ app.include_router(user_routes.router)
 @app.get("/")
 async def root():
     return {"message": "Welcome to my little FastAPI project"}
-@app.get("/protected")
-async def protected_route(current_user: str = Depends(authenticate_user)):
-    return {"message": f"Hello {current_user}, this is a protected route!"}
 
 async def startup_event():
     await ping_db()
