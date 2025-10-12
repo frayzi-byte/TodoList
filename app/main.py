@@ -19,9 +19,6 @@ app.include_router(todo_routes.router)
 app.include_router(user_routes.router)
 
 @app.on_event("startup")
-@app.get("/")
-async def root():
-    return {"message": "Welcome to my little FastAPI project"}
 
 async def startup_event():
     await ping_db()
