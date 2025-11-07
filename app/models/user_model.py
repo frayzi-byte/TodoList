@@ -1,11 +1,9 @@
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, Integer, String
 from app.db import Base
-from sqlalchemy import ForeignKey
-from sqlalchemy.sql import func
 
 class NewUser(Base):
     __tablename__ = "users"
-
-    user_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    user_name = Column(String, nullable=False)
-    user_email = Column(String, nullable=False)
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    email = Column(String, unique=True, index=True, nullable=False)
+    password = Column(String, nullable=False)

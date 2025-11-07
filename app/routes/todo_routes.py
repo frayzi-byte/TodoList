@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from app.schemas.todo_schemas import TaskSchema
 from app.services.todo_services import (
     create_task,
@@ -6,10 +6,12 @@ from app.services.todo_services import (
     update_task,
     delete_task
 )
+from app.core.dependencies import get_current_user
 
 router = APIRouter(
     prefix="/tasks",
-    tags=["Tasks"]
+    tags=["Tasks"],
+    dependencies=[Depends(get_current_user)]
 )
 
 @router.post("/")
@@ -33,4 +35,4 @@ async def delete(task_id: int):
     deleted = await delete_task(task_id)
     if not deleted:
         raise HTTPException(status_code=404, detail="Task not found")
-    return {"message": " deleted successfully"}
+    return {"message": "Deleted successfully"}
